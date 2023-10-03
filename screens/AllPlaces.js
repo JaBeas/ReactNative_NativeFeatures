@@ -1,6 +1,4 @@
-import React from 'react';
-
-import PlacesList from '../components/places/placesList';
+import PlacesList from '../components/places/PlacesList';
 
 function AllPlaces() {
   return <PlacesList />;
