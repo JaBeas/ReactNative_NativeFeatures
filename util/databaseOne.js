@@ -1,14 +1,14 @@
 import * as SQLite from 'expo-sqlite';
 
-import { Place } from '../models/placeOne';
+import { PlaceOne } from '../models/placeOne';
 
-const database = SQLite.openDatabase('places.db');
+const database = SQLite.openDatabase('placesOne.db');
 
 export function init() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        `CREATE TABLE IF NOT EXISTS places (
+        `CREATE TABLE IF NOT EXISTS placesOne (
           id INTEGER PRIMARY KEY NOT NULL,
           title TEXT NOT NULL,
           imageUri TEXT NOT NULL,
@@ -34,7 +34,7 @@ export function insertPlace(place) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        `INSERT INTO places (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
+        `INSERT INTO placesOne (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
         [
           place.title,
           place.imageUri,
@@ -59,14 +59,14 @@ export function fetchPlaces() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM places',
+        'SELECT * FROM placesOne',
         [],
         (_, result) => {
-          const places = [];
+          const placesOne = [];
 
           for (const dp of result.rows._array) {
-            places.push(
-              new Place(
+            placesOne.push(
+              new PlaceOne(
                 dp.title,
                 dp.imageUri,
                 {
@@ -78,7 +78,7 @@ export function fetchPlaces() {
               )
             );
           }
-          resolve(places);
+          resolve(placesOne);
         },
         (_, error) => {
           reject(error);
@@ -94,7 +94,7 @@ export function fetchPlaceDetails(id) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM places WHERE id = ?',
+        'SELECT * FROM placesOne WHERE id = ?',
         [id],
         (_, result) => {
           resolve(result.rows._array[0]);
