@@ -97,7 +97,18 @@ export function fetchPlaceDetails(id) {
         'SELECT * FROM placesOne WHERE id = ?',
         [id],
         (_, result) => {
-          resolve(result.rows._array[0]);
+          const dbPlace = result.rows._array[0];
+          const placeOne = new PlaceOne(
+            dbPlace.title,
+            dbPlace.imageUri,
+            {
+              lat: dbPlace.lat,
+              lng: dbPlace.lng,
+              address: dbPlace.address,
+            },
+            dbPlace.id
+          );
+          resolve(placeOne);
         },
         (_, error) => {
           reject(error);
