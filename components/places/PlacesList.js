@@ -1,8 +1,8 @@
+import { useNavigation } from '@react-navigation/native';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '../../constants/colors';
 import PlaceItem from './PlaceItem';
-import { useNavigation } from '@react-navigation/native';
 
 function PlacesList({ places }) {
   const navigation = useNavigation();

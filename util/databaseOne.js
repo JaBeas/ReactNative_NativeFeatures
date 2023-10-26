@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 
-import { Place } from '../models/place';
+import { Place } from '../models/placeOne';
 
 const database = SQLite.openDatabase('places.db');
 
